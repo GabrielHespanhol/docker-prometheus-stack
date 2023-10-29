@@ -9,12 +9,11 @@ RUN apk update && apk upgrade && \
 
 FROM alpine:latest
 
-RUN mkdir /etc/alertmanager && mkdir /var/lib/alertmanager
+RUN mkdir /etc/alertmanager
 
 COPY --from=BUILD /tmp/alertmanager-0.26.0.linux-amd64/alertmanager /usr/local/bin/alertmanager
 COPY ./alertmanager.yml /etc/alertmanager/alertmanager.yml
 
-ENTRYPOINT alertmanager --config.file=/etc/alertmanager/alertmanager.yml \
-                        --storage.tsdb.path=/var/lib/alertmanager 
+ENTRYPOINT alertmanager --config.file=/etc/alertmanager/alertmanager.yml 
 
 EXPOSE 9093:9093

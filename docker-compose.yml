@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  prometheus:
+    image: prometheus:1.0
+    ports:
+      - 9090:9090
+
+  alertmanager:
+    image: alertmanager:1.0
+    ports:
+      - 9093:9093
+    depends_on:
+      - prometheus
+
+  grafana:
+    image: grafana/grafana
+    ports:
+      - 3000:3000
+    depends_on:
+      - prometheus
