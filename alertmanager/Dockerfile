@@ -1,19 +1,24 @@
-FROM alpine:latest as BUILD
+FROM alpine AS download
+ 
+LABEL MAINTENER="Gabriel Hespanhol"
+LABEL VERSION="1.0"
 
-MAINTAINER Gabriel Lopes Hespanhol
+WORKDIR /app
 
-RUN apk update && apk upgrade && \
-    apk add wget && cd /tmp && \
-    wget  https://github.com/prometheus/alertmanager/releases/download/v0.26.0/alertmanager-0.26.0.linux-amd64.tar.gz && \
-    tar -zxvf alertmanager-0.26.0.linux-amd64.tar.gz
+RUN apk update && \
+    apk add wget tar && \
+    wget https://github.com/prometheus/alertmanager/releases/download/v0.28.1/alertmanager-0.28.1.linux-amd64.tar.gz && \
+    tar -zxvf alertmanager-0.28.1.linux-amd64.tar.gz 
 
-FROM alpine:latest
+FROM alpine
 
-RUN mkdir /etc/alertmanager
+WORKDIR /app
 
-COPY --from=BUILD /tmp/alertmanager-0.26.0.linux-amd64/alertmanager /usr/local/bin/alertmanager
-COPY ./alertmanager.yml /etc/alertmanager/alertmanager.yml
+EXPOSE 9093
 
-ENTRYPOINT alertmanager --config.file=/etc/alertmanager/alertmanager.yml 
+RUN mkdir -p /etc/alertmanager
 
-EXPOSE 9093:9093
+COPY  --from=download /app/alertmanager-0.28.1.linux-amd64/alertmanager.yml /app/alertmanager.yml
+COPY  --from=download /app/alertmanager-0.28.1.linux-amd64/alertmanager /etc/alertmanager/alertmanager
+
+ENTRYPOINT [ "/etc/alertmanager/alertmanager" ]
