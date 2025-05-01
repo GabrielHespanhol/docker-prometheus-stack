@@ -1,22 +1,26 @@
-FROM alpine:latest as BUILD
+FROM alpine AS download
+ 
+LABEL MAINTENER="Gabriel Hespanhol"
+LABEL VERSION="1.0"
 
-MAINTAINER Gabriel Lopes Hespanhol
+WORKDIR /app
 
-RUN apk update && apk upgrade && \
-    apk add wget && cd /tmp && \
-    wget  https://github.com/prometheus/prometheus/releases/download/v2.45.1/prometheus-2.45.1.linux-amd64.tar.gz && \
-    tar -zxvf prometheus-2.45.1.linux-amd64.tar.gz
+RUN apk update && \
+    apk add wget tar && \
+    wget https://github.com/prometheus/prometheus/releases/download/v3.3.0/prometheus-3.3.0.linux-amd64.tar.gz && \
+    tar -zxvf /app/prometheus-3.3.0.linux-amd64.tar.gz 
 
-FROM alpine:latest
+FROM alpine
 
-RUN mkdir /etc/prometheus && mkdir /var/lib/prometheus
+WORKDIR /app
 
-COPY --from=BUILD /tmp/prometheus-2.45.1.linux-amd64/console* /etc/prometheus
-COPY --from=BUILD /tmp/prometheus-2.45.1.linux-amd64/prometheus /usr/local/bin/prometheus
-COPY ./prometheus.yml /etc/prometheus/prometheus.yml
+EXPOSE 9090
 
-ENTRYPOINT prometheus --config.file=/etc/prometheus/prometheus.yml \
-                      --storage.tsdb.retention.time=15d \
-                      --storage.tsdb.path=/var/lib/prometheus 
+COPY entrypoint.sh /app/entrypoint.sh
 
-EXPOSE 9090:9090
+RUN mkdir -p /etc/prometheus && chmod +x /app/entrypoint.sh
+
+COPY  --from=download /app/prometheus-3.3.0.linux-amd64/prometheus.yml /app/prometheus.yml
+COPY  --from=download /app/prometheus-3.3.0.linux-amd64/prometheus /etc/prometheus/prometheus
+
+ENTRYPOINT [ "/app/entrypoint.sh" ]
