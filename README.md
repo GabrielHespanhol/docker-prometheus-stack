@@ -16,11 +16,11 @@ Você também pode baixar as imagens no docker hub
 
 Ainda será feito melhorias no projeto, para deixar o stack mais personalizável.
 
-Meu dockerhub: https://hub.docker.com/repositories/lopes97
+Meu docker hub: https://hub.docker.com/repositories/lopes97
 
 ## Como subir o projeto de forma simples:
 
-> É importante ter o docker e docker-compose instaladoem sua máquina.
+> É importante ter o docker e docker-compose instalados em sua máquina.
 > Também é importante verificar a necessidade do comando sudo
 
 ```bash
