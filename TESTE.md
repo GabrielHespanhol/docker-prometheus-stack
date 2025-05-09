@@ -1,7 +1,3 @@
 TESTE DO JENKINS
 
-TEXTO 2
-
-TEXTO 3
-
-TEXTO 4
+TEXTO de exemplo
