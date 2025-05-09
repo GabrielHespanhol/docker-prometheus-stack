@@ -27,30 +27,29 @@ pipeline {
     post {
         success {
             withCredentials([string(credentialsId: 'slack-webhook', variable: 'SLACK_URL')]) {
-                slackSend(
-                    webhookUrl: env.SLACK_URL,
-                    message: "✅ *Build concluído com sucesso!* Imagem: `${IMAGE_NAME}:${IMAGE_TAG}`"
-                )
+                script {
+                    def payload = [
+                        text: "✅ *Build concluído com sucesso!* Imagem: `${IMAGE_NAME}:${IMAGE_TAG}`"
+                    ]
+                    httpRequest httpMode: 'POST',
+                                url: SLACK_URL,
+                                contentType: 'APPLICATION_JSON',
+                                requestBody: groovy.json.JsonOutput.toJson(payload)
+                }
             }
         }
         failure {
             withCredentials([string(credentialsId: 'slack-webhook', variable: 'SLACK_URL')]) {
-                slackSend(
-                    webhookUrl: env.SLACK_URL,
-                    message: "❌ *Build falhou!* Confira os logs para mais detalhes."
-                )
+                script {
+                    def payload = [
+                        text: "❌ *Build falhou!* Verifique os logs no Jenkins."
+                    ]
+                    httpRequest httpMode: 'POST',
+                                url: SLACK_URL,
+                                contentType: 'APPLICATION_JSON',
+                                requestBody: groovy.json.JsonOutput.toJson(payload)
+                }
             }
-        }
-        unstable {
-            withCredentials([string(credentialsId: 'slack-webhook', variable: 'SLACK_URL')]) {
-                slackSend(
-                    webhookUrl: env.SLACK_URL,
-                    message: "⚠️ *Build instável.* Verifique possíveis alertas."
-                )
-            }
-        }
-        always {
-            // opcional: limpar workspace, enviar métricas, etc.
         }
     }
 }
