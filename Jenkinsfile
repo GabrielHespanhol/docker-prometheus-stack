@@ -19,7 +19,16 @@ pipeline {
                     sh "docker build -t ${IMAGE_NAME}:${IMAGE_TAG} prometheus/"
                 }
             }
+        }        
+        stage('Push Docker image') {
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: 'dockerhubuser', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                        sh "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}"
+                        sh "docker push ${IMAGE_NAME}:${IMAGE_TAG}"
+                    }
+                }
+            }
         }
-
     }
 }
