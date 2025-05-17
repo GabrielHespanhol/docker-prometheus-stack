@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = 'lopes97/alertmanager-0.28.1'
+        IMAGE_NAME = 'lopes97/prometheus-3.3.0'
         IMAGE_TAG = 'latest'
     }
 
