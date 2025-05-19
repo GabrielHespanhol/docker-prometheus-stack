@@ -1,7 +1,7 @@
 FROM alpine AS download
  
 LABEL MAINTENER="Gabriel Hespanhol"
-LABEL VERSION="1.0"
+LABEL VERSION="1.1"
 
 WORKDIR /app
 
