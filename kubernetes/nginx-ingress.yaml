@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: grafana-ingress
+  namespace: monitoramento
+  labels:
+    app: grafana
+spec:
+  rules:
+  - host: grafana.127.0.0.1.nip.io # <-- Substitua pelo IP que 'minikube ip' retornou!
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: grafana-svc
+            port:
+              number: 3000

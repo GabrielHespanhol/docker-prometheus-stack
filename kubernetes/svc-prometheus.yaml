@@ -4,9 +4,10 @@ metadata:
   name: prometheus-svc
   namespace: monitoramento
 spec:
+  # type: LoadBalancer
   selector:
     app: prometheus
   ports:
-    - protocol: TCP
+    - name: "9090"
       port: 9090
       targetPort: 9090
