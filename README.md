@@ -1,20 +1,28 @@
-# docker-prometheus-stack
+## Uma simples stack de observabilidade para estudos de docker e kubernetes
 
-## Uma simples stack de observabilidade utilizando docker
+Uma breve explicação: Estarei utilizando a mesma stack com docker e kubernetes (minikube) para comparação e estudo.
 
-Aqui estamos utilizando algumas tecnologias open source para observabilidade como
+### Parte 1 - Subindo a stack com docker e docker-compose
+
+Aqui estamos utilizando algumas tecnologias open source para observabilidade
+
+- Grafana
 - Prometheus
 - Alertmanager
-- Grafana
+
+Temos dois principais diretórios no repositório
+
+**Docker**: Nesse diretório temos alguns arquivos, em principal:
+- Dockerfile utilizado para gerar a imagem do prometheus
+- Dockerfile utilizado para gerar a imagem do alertmanager
+- docker-compose.yml utilizado para subir o projeto, onde é utilizado a imagem docker direto de meu dockerhub e imagem oficial do grafana.
 
 Temos os arquivos de Dockerfile para gerar o build das imagens
 
-Você também pode baixar as imagens no docker hub
-- lopes97/grafana-11.6.1:1.0
-- lopes97/alertmanager-0.28.1:1.0
-- lopes97/prometheus-3.3.0:1.0
-
-Ainda será feito melhorias no projeto, para deixar o stack mais personalizável.
+Imagens do dockerhub:
+- grafana/grafana:latest
+- lopes97/alertmanager:2.0
+- lopes97/prometheus:2.0
 
 Meu docker hub: https://hub.docker.com/repositories/lopes97
 
@@ -23,12 +31,14 @@ Meu docker hub: https://hub.docker.com/repositories/lopes97
 > É importante ter o docker e docker-compose instalados em sua máquina.
 > Também é importante verificar a necessidade do comando sudo
 
+Acessando o diretório Docker para utilização do docker-compose:
 ```bash
-git clone https://github.com/GabrielHespanhol/docker-prometheus-stack.git && cd docker-prometheus-stack
+git clone https://github.com/GabrielHespanhol/docker-prometheus-stack.git && cd docker-prometheus-stack/Docker
 ```
 
+Subindo containers com o docker-compose:
 ```bash
 docker-compose up -d --build
 ```
 
-## Realizando testes com o jenkins
+# Parte 2 - Kubernetes (Ainda pendente)
