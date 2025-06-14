@@ -4,7 +4,7 @@ LABEL MAINTENER="Gabriel Hespanhol"
 LABEL VERSION="1.1"
 
 # Alterar para arm64 caso queira trocar de arquitetura
-ENV SYSTEM_ARCH="amd64"
+ENV SYSTEM_ARCH="arm64"
 
 WORKDIR /app
 
@@ -15,8 +15,11 @@ RUN apk update && \
 
 FROM alpine
 
+LABEL MAINTENER="Gabriel Hespanhol"
+LABEL VERSION="1.1"
+
 # Alterar para arm64 caso queira trocar de arquitetura
-ENV SYSTEM_ARCH="amd64"
+ENV SYSTEM_ARCH="arm64"
 
 WORKDIR /app
 

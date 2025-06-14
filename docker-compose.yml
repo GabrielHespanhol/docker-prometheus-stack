@@ -2,21 +2,21 @@ version: '3.8'
 
 services:
   prometheus:
-    build: ./prometheus
+    image: prometheus:1.0
     ports:
       - 9090:9090
     environment:
       - RETENTION_TIME=15d
 
   alertmanager:
-    build: ./alertmanager
+    image: alertmanager:1.0
     ports:
       - 9093:9093
     depends_on:
       - prometheus
 
   grafana:
-    build: ./grafana
+    image: grafana/grafana:latest
     ports:
       - 3000:3000
     depends_on:
