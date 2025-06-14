@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  # Prometheus container spec
+  prometheus:
+    image: lopes97/prometheus:2.0
+    container_name: prometheus
+    ports:
+      - 9090:9090
+    environment:
+      - RETENTION_TIME=15d
+    volumes:
+      - prometheus_data:/etc/prometheus/data
+
+  # Alertmanager container spec
+  alertmanager:
+    image: lopes97/alertmanager:2.0
+    container_name: alertmanager
+    ports:
+      - 9093:9093
+    depends_on:
+      - prometheus
+
+  # Grafana container spec
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - 3000:3000
+    depends_on:
+      - prometheus
+    volumes:
+      - grafana_data:/var/lib/grafana
+
+volumes:
+  grafana_data: {}
+  prometheus_data: {}
