@@ -38,7 +38,7 @@ git clone https://github.com/GabrielHespanhol/docker-prometheus-stack.git && cd 
 
 Subindo containers com o docker-compose:
 ```bash
-docker-compose up -d --build
+docker-compose up -d
 ```
 
 # Parte 2 - Kubernetes (Ainda pendente)
