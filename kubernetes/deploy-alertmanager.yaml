@@ -1,19 +1,25 @@
+# Arquivo de deployment do alertmanager
 apiVersion: apps/v1
 kind: Deployment
+# Aqui definimos metadados para o nosso deployment
 metadata:
   name: alertmanager-deployment
   namespace: monitoramento
   labels:
     app: alertmanager
+# Aqui definimos specs do deployment como por exemplo o número de replicas
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: alertmanager
+  # Template e metadados para o container (pod)
   template:
     metadata:
       labels:
         app: alertmanager
+    # Aqui definimos os specs do container (pod).
+    # Definições como imagem, porta de rede, volumes/mountpoint e limites de cpu e memória
     spec:
       containers:
       - name: alertmanager

@@ -1,13 +1,20 @@
+# Arquivo para definir o SVC do prometheus
 apiVersion: v1
 kind: Service
+# Metadados do serviço
 metadata:
   name: prometheus-svc
   namespace: monitoramento
 spec:
   # type: LoadBalancer
+  # Aqui é o seletor, no caso ele vai buscar por pods onde tem app=prometheus
+  # Esse valor estamos definindo no deployment
   selector:
     app: prometheus
   ports:
-    - name: "9090"
+    # Nome da porta
+    - name: "prometheus"
+      # Porta do SVC do prometheus
       port: 9090
+      # Porta do container que definimos no deployment
       targetPort: 9090

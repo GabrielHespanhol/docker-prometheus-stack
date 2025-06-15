@@ -1,13 +1,20 @@
+# Arquivo para definir o SVC do alertmanager
 apiVersion: v1
 kind: Service
+# Metadados do serviço
 metadata:
   name: alertmanager-svc
   namespace: monitoramento
 spec:
   # type: LoadBalancer
+  # Aqui é o seletor, no caso ele vai buscar por pods onde tem app=alertmanager
+  # Esse valor estamos definindo no deployment
   selector:
     app: alertmanager
   ports:
-    - name: "9093"
+    # Nome da porta
+    - name: "alertmanager"
+      # Porta do SVC do alertmanager
       port: 9093
+      # Porta do container que definimos no deployment
       targetPort: 9093

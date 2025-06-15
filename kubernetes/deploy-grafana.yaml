@@ -1,22 +1,38 @@
+# Arquivo de deployment do Grafana
 apiVersion: apps/v1
 kind: Deployment
+# Aqui definimos metadados para o nosso deployment
 metadata:
   name: grafana-deployment
   namespace: monitoramento
   labels:
     app: grafana
+# Aqui definimos specs do deployment como por exemplo o número de replicas
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: grafana
+  # Template e metadados para o container (pod) 
   template:
     metadata:
       labels:
         app: grafana
+    # Aqui definimos os specs do container (pod).
+    # Definições como imagem, porta de rede, volumes/mountpoint e limites de cpu e memória
     spec:
       containers:
       - name: grafana
         image: grafana/grafana:latest
         ports:
         - containerPort: 3000
+        #volumeMounts:
+        #- name: grafana-pvc
+        #  mountPath: /var/lib/grafana
+      # Aqui estamos fora do pod porém dentro das specs de containers
+      # Esse campo é onde vamos fornecer o volume que será utilizado no container
+      # Esse volume será utilizado na sessão volumeMounts    
+      #volumes:
+      #- name: grafana-pvc
+      #  persistentVolumeClaim:
+      #   claimName: grafana-pvc

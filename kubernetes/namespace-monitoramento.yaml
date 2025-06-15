@@ -1,3 +1,5 @@
+# Arquivo para definir o namespace que vamos utilizar
+# No caso, estamos criando o namespace monitoramento
 apiVersion: v1
 kind: Namespace
 metadata:

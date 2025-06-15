@@ -1,22 +1,38 @@
+# Arquivo para deployment do prometheus
 apiVersion: apps/v1
 kind: Deployment
+# Aqui definimos metadados para o nosso deployment
 metadata:
   name: prometheus-deployment
   namespace: monitoramento
   labels:
     app: prometheus
+# Aqui definimos specs do deployment como por exemplo o número de replicas
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: prometheus
+  # Template e metadados para o container (pod)    
   template:
     metadata:
       labels:
         app: prometheus
+    # Aqui definimos os specs do container (pod).
+    # Definições como imagem, porta de rede, volumes/mountpoint e limites de cpu e memória
     spec:
       containers:
       - name: prometheus
         image: lopes97/prometheus:2.0
         ports:
         - containerPort: 9090
+        volumeMounts:
+        - name: prometheus-pvc
+          mountPath: /etc/prometheus/data
+      # Aqui estamos fora do pod porém dentro das specs de containers
+      # Esse campo é onde vamos fornecer o volume que será utilizado no container
+      # Esse volume será utilizado na sessão volumeMounts    
+      volumes:
+      - name: prometheus-pvc
+        persistentVolumeClaim:
+          claimName: prometheus-pvc

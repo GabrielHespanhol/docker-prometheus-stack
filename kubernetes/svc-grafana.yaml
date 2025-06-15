@@ -1,12 +1,20 @@
+# Arquivo para definir o SVC do grafana
 apiVersion: v1
 kind: Service
+# Metadados do serviço
 metadata:
   name: grafana-svc
   namespace: monitoramento
 spec:
+  # type: LoadBalancer
+  # Aqui é o seletor, no caso ele vai buscar por pods onde tem app=grafana
+  # Esse valor estamos definindo no deployment
   selector:
     app: grafana
   ports:
-    - name: "3000"
+    # Nome da porta
+    - name: "grafana"
+      # Porta do SVC do alertmanager
       port: 3000
+      # Porta do container que definimos no deployment
       targetPort: 3000
