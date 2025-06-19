@@ -19,7 +19,7 @@ Temos dois principais diretórios no repositório
 
 Temos os arquivos de Dockerfile para gerar o build das imagens
 
-Imagens do dockerhub:
+Imagens no dockerhub:
 - grafana/grafana:latest
 - lopes97/alertmanager:2.0
 - lopes97/prometheus:2.0
@@ -36,9 +36,13 @@ Acessando o diretório Docker para utilização do docker-compose:
 git clone https://github.com/GabrielHespanhol/docker-prometheus-stack.git && cd docker-prometheus-stack/Docker
 ```
 
+> OBS: Por padrão o docker compose up vai subir a stack utilizando imagens baixadas do dockerhub, pode ser interessante você realizar o build da imagem via dockerfile, sendo um aprendizado válido e importante.
+> 
+> O build de imagem de forma manual e também via arquivo compose estarei adicionando posteriormente ao repositório.
+
 Subindo containers com o docker-compose:
 ```bash
-docker-compose up -d --build
+docker-compose up -d
 ```
 
 # Parte 2 - Kubernetes (Ainda pendente)
