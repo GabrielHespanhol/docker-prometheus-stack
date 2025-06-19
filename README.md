@@ -45,4 +45,53 @@ Subindo containers com o docker-compose:
 docker-compose up -d
 ```
 
-# Parte 2 - Kubernetes (Ainda pendente)
+# Parte 2 - Kubernetes (K8S)
+
+Para o nosso deploy via kubernetes estarei utilizando o minikube com o driver=docker, o minikube permite trabalhar com VMs e diferentes drivers, escolha a sua opção preferida.
+
+Um ponto de observação importante é que foi preciso adicionar um addons ao minikube para uso do nginx-ingress-controller, para isso é muito simples, basta executar o seguinte comando:
+
+```bash
+minikube addons enable ingress
+```
+
+### Falando de kubernetes (K8S)
+
+Diferente do docker compose, onde temos um único arquivo com todas definições de sua execução, o kubernetes até permite fazer em um único arquivo porém achei melhor separar as coisas e deixar elas de forma mais organizada. 
+
+Para nossa stack, vamos utilizar alguns objetos (Talvez objeto não seja a melhor definição porém me ajudou na compreensão).
+
+- Pod: A menor unidade implantável no Kubernetes. Um Pod seria o equivalente a um container no Docker, porém existem importantes diferenças entre um pod e um container e vou tentar explicar. Um Pod pode ter um ou mais containers em execução, digamos que você define os recursos para o Pod como rede e CPU e esses recursos serão compartilhados entre os containers do pod.
+- Deployment: O deployment é um objeto que vai gerenciar a implantação de um pod, em comparação com o docker comopose digamos que o deployment vai definir o número de replicas, volumes, restarts e outras politicas para cuidar da execução do pod.
+- Service: O service é quem vai expor e permitir que possamos acessar os serviços em execução em nossos pods. Ele fornece um endereço IP estável e DNS para um conjunto de Pods. Comparando com o Docker Compose, onde podemos expor uma porta do host, o Service no Kubernetes oferece funcionalidades semelhantes e mais avançadas, como diferentes tipos de exposição (ClusterIP, NodePort, LoadBalancer).
+
+> OBS: Essa é uma explicação simples e talvez não a mais detalhada e completa, a ideia é deixar claro a função de cada objeto que estamos utilizando e somar na explicação dos comentários internos em cada arquivo.
+> Essa documentação tende a melhorar e ficar mais completa com a ajuda dos leitores e meu progresso com os estudos com kubernetes.
+
+
+### Mão na massa e bora ver esse k8s em ação
+
+Para executar os recursos no k8s você precisa acessar a basta kubernetes do projeto:
+
+```bash
+cd kubernetes
+```
+
+Agora vamos rodar dois comandos, um para criar e outro para aplicar nossos arquivos:
+
+```bash
+kubectl create -f .
+kubectl apply -f .
+```
+
+Com isso você deve receber uma mensagem informando que os recursos foram criados e agora pode testar seu kubernetes e práticar. 
+
+Se tudo ocorreu bem você terá um ingress para conectar ao grafana via endereço `grafana.127.0.0.1.nip.io`, caso esteja com o minikube rodando no macOs ou windows configurações adicionais podem ser necessárias para o ingress funcionar. 
+
+
+# Tarefas que tenho mapeadas
+[] Melhorar a documentação e descrições
+[] Como enviar imagens locais de meu docker para o minikube
+[] Ingress funcionando Linux/Windows/macOS
+[] Criar recursos de storage
+[] Implementar o argoCD ou ferramenta de CI/CD
