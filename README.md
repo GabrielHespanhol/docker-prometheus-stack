@@ -90,8 +90,9 @@ Se tudo ocorreu bem você terá um ingress para conectar ao grafana via endereç
 
 
 # Tarefas que tenho mapeadas
-[] Melhorar a documentação e descrições
-[] Como enviar imagens locais de meu docker para o minikube
-[] Ingress funcionando Linux/Windows/macOS
-[] Criar recursos de storage
-[] Implementar o argoCD ou ferramenta de CI/CD
+
+    [❌] Melhorar a documentação e descrições.
+    [❌] Como enviar imagens locais de meu docker para o minikube.
+    [❌] Ingress funcionando Linux/Windows/macOS.
+    [❌] Criar recursos de storage.
+    [❌] Implementar o argoCD ou ferramenta de CI/CD
