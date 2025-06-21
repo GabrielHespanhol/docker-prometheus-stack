@@ -8,5 +8,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - name: Build prometheus imagem
-      run: docker build /Docker/prometheus/ --file Dockerfile --tag teste-prometheus:$(date +%s)
+    - name: Build prometheus image
+      run: docker build ./Docker/prometheus --tag "teste-prometheus:$(date +%s)"
