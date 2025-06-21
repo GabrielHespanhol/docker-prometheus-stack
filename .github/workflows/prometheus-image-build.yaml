@@ -2,6 +2,7 @@ name: Docker Build Prometheus image- Prometheus build de imagem
 
 on:
   pull_request:
+    
 
 jobs:
   build_and_push:
