@@ -2,7 +2,6 @@ name: Test Stack with Docker Compose
 
 on:
   pull_request:
-    branches: [ "main" ]
 
 jobs:
   test-stack:
