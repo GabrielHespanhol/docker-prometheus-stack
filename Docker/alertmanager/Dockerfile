@@ -4,7 +4,8 @@ LABEL MAINTENER="Gabriel Hespanhol"
 LABEL VERSION="1.2"
 
 # Alterar caso queira trocar de arquitetura
-ENV SYSTEM_ARCH="arm64"
+# Por padrão é AMD64
+ENV SYSTEM_ARCH="amd64"
 
 WORKDIR /app
 
@@ -19,7 +20,8 @@ LABEL MAINTENER="Gabriel Hespanhol"
 LABEL VERSION="1.2"
 
 # Alterar caso queira trocar de arquitetura
-ENV SYSTEM_ARCH="arm64"
+# Por padrão é AMD64
+ENV SYSTEM_ARCH="amd64"
 
 WORKDIR /etc/alertmanager
 
