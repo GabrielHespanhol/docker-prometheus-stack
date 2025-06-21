@@ -71,7 +71,7 @@ Para nossa stack, vamos utilizar alguns objetos (Talvez objeto não seja a melho
 
 ### Mão na massa e bora ver esse k8s em ação
 
-Para executar os recursos no k8s você precisa acessar a basta kubernetes do projeto:
+Para executar os recursos no k8s você precisa acessar a pasta kubernetes do projeto:
 
 ```bash
 cd kubernetes
