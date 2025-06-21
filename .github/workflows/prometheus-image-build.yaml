@@ -1,0 +1,27 @@
+name: Docker Build Prometheus image- Prometheus build de imagem
+
+on:
+  pull_request:
+
+jobs:
+  build_and_push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login no Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build e push da imagem Prometheus
+        uses: docker/build-push-action@v5
+        with:
+          context: ./Docker/prometheus
+          push: true
+          tags: lopes97/prometheus:latest
