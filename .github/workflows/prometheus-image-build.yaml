@@ -1,7 +1,7 @@
-name: Docker - Prometheus image build and push
+name: Docker Build Prometheus image- Prometheus build de imagem
 
 on:
-  push:
+  pull_request:
 
 jobs:
   build_and_push:
