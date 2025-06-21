@@ -1,0 +1,12 @@
+name: Docker image
+
+on:
+  push:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build prometheus imagem
+      run: docker build /Docker/prometheus/ --file Dockerfile --tag teste-prometheus:$(date +%s)
