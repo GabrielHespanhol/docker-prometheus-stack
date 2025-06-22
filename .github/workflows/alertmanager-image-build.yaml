@@ -1,4 +1,4 @@
-name: Docker Build Image - Prometheus build de imagem
+name: Docker Build Image - Alertmanager build de imagem
 
 on:
   pull_request:
@@ -22,6 +22,6 @@ jobs:
       - name: Build e push da imagem Prometheus
         uses: docker/build-push-action@v5
         with:
-          context: ./Docker/prometheus
+          context: ./Docker/alertmanager
           push: true
-          tags: lopes97/prometheus:latest
+          tags: lopes97/alertmanager:latest
