@@ -1,7 +1,12 @@
+# Definindo a versão do docker compose
 version: '3.8'
 
+# Aqui vamos iniciar a definição dos serviços que basicamente são containers
+# Para cada container podemos definir um network, volumes entre outras opções
 services:
   # Prometheus container spec
+  # Arqui vamos definir imagem, nome do container, rede, variáveis de ambiente e volumes
+  # Existem outras configurações porém não irei utilizar para ficar o mais simples possível
   prometheus:
     image: lopes97/prometheus:latest
     container_name: prometheus
@@ -32,6 +37,7 @@ services:
       - grafana_data:/var/lib/grafana
 
 # Definindo os volumes utilizados para o prometheus e grafana
+# Aqui estou definindo eles do tipo volume.
 volumes:
   grafana_data: {}
   prometheus_data: {}
