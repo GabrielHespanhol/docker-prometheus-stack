@@ -21,8 +21,8 @@ Temos os arquivos de Dockerfile para gerar o build das imagens
 
 Imagens no dockerhub:
 - grafana/grafana:latest
-- lopes97/alertmanager:2.0
-- lopes97/prometheus:2.0
+- lopes97/alertmanager:latest
+- lopes97/prometheus:latest
 
 Meu docker hub: https://hub.docker.com/repositories/lopes97
 
@@ -42,7 +42,7 @@ git clone https://github.com/GabrielHespanhol/docker-prometheus-stack.git && cd 
 
 Subindo containers com o docker-compose:
 ```bash
-docker-compose up -d --build
+docker-compose up -d
 ```
 
 # Parte 2 - Kubernetes (K8S)
@@ -91,8 +91,9 @@ Se tudo ocorreu bem você terá um ingress para conectar ao grafana via endereç
 
 # Tarefas que tenho mapeadas
 
-    [❌] Melhorar a documentação e descrições.
+    [∞] Melhorar a documentação e descrições.
     [❌] Como enviar imagens locais de meu docker para o minikube.
     [❌] Ingress funcionando Linux/Windows/macOS.
-    [❌] Criar recursos de storage.
-    [❌] Implementar o argoCD ou ferramenta de CI/CD
+    [❌] Criar recursos de storage no minikube.
+    [❌] Implementar o argoCD no minikube
+    [✅] Implementar github actions para build and push de imagens docker
