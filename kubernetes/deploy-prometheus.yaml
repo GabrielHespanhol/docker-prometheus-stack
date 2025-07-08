@@ -9,7 +9,7 @@ metadata:
     app: prometheus
 # Aqui definimos specs do deployment como por exemplo o número de replicas
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: prometheus
